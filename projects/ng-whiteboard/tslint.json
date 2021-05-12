@@ -5,12 +5,14 @@
       true,
       "attribute",
       "lib",
+      "drizm",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
       "lib",
+      "drizm",
       "kebab-case"
     ]
   }

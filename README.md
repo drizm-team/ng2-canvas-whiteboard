@@ -76,7 +76,7 @@ In your component, you should add the CanvasWhiteboardComponent as a view provid
 In the html file, you can insert the Canvas Whiteboard
 
 ```html
-<canvas-whiteboard #canvasWhiteboard
+<drizm-whiteboard #canvasWhiteboard
                      [drawButtonClass]="'drawButtonClass'"
                      [drawButtonText]="'Draw'"
                      [clearButtonClass]="'clearButtonClass'"
@@ -93,24 +93,24 @@ In the html file, you can insert the Canvas Whiteboard
                      [lineWidth]="5"
                      [strokeColor]="'rgb(0,0,0)'"
                      [shouldDownloadDrawing]="true"
-                     (onBatchUpdate)="sendBatchUpdate($event)"
-                     (onClear)="onCanvasClear()"
-                     (onUndo)="onCanvasUndo($event)"
-                     (onRedo)="onCanvasRedo($event)">
-</canvas-whiteboard>
+                     (batchUpdate)="sendBatchUpdate($event)"
+                     (clear)="onCanvasClear()"
+                     (undo)="onCanvasUndo($event)"
+                     (redo)="onCanvasRedo($event)">
+</drizm-whiteboard>
 ```
 
 If there is too much overhead with inputs, you can just specify the [options] input, and specify the options from the typescript code
 
 Example:
 ```html
-<canvas-whiteboard #canvasWhiteboard
+<drizm-whiteboard #canvasWhiteboard
                    [options]="canvasOptions"
-                   (onBatchUpdate)="onCanvasDraw($event)"
-                   (onClear)="onCanvasClear()"
-                   (onUndo)="onCanvasUndo($event)"
-                   (onRedo)="onCanvasRedo($event)">
-</canvas-whiteboard>
+                   (batchUpdate)="onCanvasDraw($event)"
+                   (clear)="onCanvasClear()"
+                   (undo)="onCanvasUndo($event)"
+                   (redo)="onCanvasRedo($event)">
+</drizm-whiteboard>
 ```
 Code:
 ```typescript
@@ -194,14 +194,14 @@ Changes to this object will be detected by the canvas in the OnChange listener a
   };
 
    //View
-  <canvas-whiteboard #canvasWhiteboard
+  <drizm-whiteboard #canvasWhiteboard
                        [options]="canvasOptions"
                        (onBatchUpdate)="onCanvasDraw($event)"
                        (onClear)="onCanvasClear()"
                        (onUndo)="onCanvasUndo($event)"
                        (onRedo)="onCanvasRedo($event)"
                        (onSave)="onCanvasSave($event)">
-  </canvas-whiteboard>
+  </drizm-whiteboard>
 ```
 
 NOTE: In order for the changeDetection to pick up the options changes, you must change the options reference whenever you want to change a value.
@@ -460,8 +460,8 @@ Example, save an image whenever an undo action was made:
 
 HTML: Create a canvas view reference with some name (ex: #canvasWhiteboard)
 ```html
-<canvas-whiteboard #canvasWhiteboard>
-</canvas-whiteboard>
+<drizm-whiteboard #canvasWhiteboard>
+</drizm-whiteboard>
 ```
 ```typescript
 import {CanvasWhiteboardComponent} from '@drizm/ng-whiteboardd';

@@ -13,7 +13,7 @@ import {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  @ViewChild(CanvasWhiteboardComponent) canvasWhiteboardComponent: CanvasWhiteboardComponent;
+  @ViewChild(CanvasWhiteboardComponent) canvasWhiteboardComponent!: CanvasWhiteboardComponent;
   canvasOptions: CanvasWhiteboardOptions = {};
 
   constructor(private canvasWhiteboardService: CanvasWhiteboardService,
@@ -34,9 +34,9 @@ export class AppComponent {
 
   loadFromStorage(): void {
     // Get the "string" from the storage
-    const canvasDrawingsJson: string = sessionStorage.getItem('canvasWhiteboardDrawings');
+    const canvasDrawingsJson: string | null = sessionStorage.getItem('canvasWhiteboardDrawings');
     // Null check
-    if (canvasDrawingsJson != null) {
+    if (canvasDrawingsJson !== null) {
       // Parse the string, and get an Array<string>
       const parsedStorageUpdates: Array<string> = JSON.parse(canvasDrawingsJson);
       // Parse each string inside the Array<string>, and get an Array<CanvasWhiteboardUpdate>
