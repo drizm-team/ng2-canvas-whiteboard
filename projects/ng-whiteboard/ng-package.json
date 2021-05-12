@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/ng2-canvas-whiteboard",
+  "dest": "../../dist/ng-whiteboard",
   "whitelistedNonPeerDependencies": [
     "lodash-es"
   ],

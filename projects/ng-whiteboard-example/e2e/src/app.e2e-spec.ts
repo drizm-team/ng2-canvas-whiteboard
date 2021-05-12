@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('ng2-canvas-whiteboard-example app is running!');
+    expect(page.getTitleText()).toEqual('ng-whiteboard-example app is running!');
   });
 
   afterEach(async () => {

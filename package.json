@@ -1,10 +1,10 @@
 {
-  "name": "ng2-canvas-whiteboard-workspace",
+  "name": "ng-whiteboard-workspace",
   "version": "4.0.2",
   "scripts": {
-    "build:ng2-canvas-whiteboard:prod": "ng build ng2-canvas-whiteboard --prod",
-    "test:ng2-canvas-whiteboard": "ng test ng2-canvas-whiteboard",
-    "serve:ng2-canvas-whiteboard-example": "ng serve ng2-canvas-whiteboard-example"
+    "build:ng2-canvas-whiteboard:prod": "ng build ng-whiteboard --prod",
+    "test:ng2-canvas-whiteboard": "ng test ng-whiteboard",
+    "serve:ng2-canvas-whiteboard-example": "ng serve ng-whiteboard-example --port 8000"
   },
   "private": true,
   "dependencies": {

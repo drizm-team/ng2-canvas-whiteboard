@@ -1,4 +1,4 @@
-# ng2-canvas-whiteboard
+# Forked from ng2-canvas-whiteboard
 
 ## Canvas version changes
 #### v4.0.2 merges PR to add variables for fillColorPickerText and strokeColorPickerText
@@ -37,7 +37,7 @@ For the sake of reverse-compat, the `colorPickerEnabled` input is still there an
 1. Install npm module:
 
     ```bash
-    npm install ng2-canvas-whiteboard --save
+    npm install @drizm/ng-whiteboard --save
     ```
     
 2. If you are using system.js you may want to add this into `map` and `package` config:
@@ -45,10 +45,10 @@ For the sake of reverse-compat, the `colorPickerEnabled` input is still there an
     ```json
     {
         "map": {
-            "ng2-canvas-whiteboard": "node_modules/ng2-canvas-whiteboard"
+            "@drizm/ng-whiteboard": "node_modules/@drizm/ng-whiteboard"
         },
         "packages": {
-            "ng2-canvas-whiteboard": { "main": "index.js", "defaultExtension": "js" }
+            "@drizm/ng-whiteboard": { "main": "index.js", "defaultExtension": "js" }
         }
     }
     ```
@@ -464,7 +464,7 @@ HTML: Create a canvas view reference with some name (ex: #canvasWhiteboard)
 </canvas-whiteboard>
 ```
 ```typescript
-import {CanvasWhiteboardComponent} from 'ng2-canvas-whiteboard';
+import {CanvasWhiteboardComponent} from '@drizm/ng-whiteboardd';
 
 export class AppComponent {
 

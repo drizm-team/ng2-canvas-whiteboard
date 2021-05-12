@@ -5,7 +5,7 @@ import {
   CanvasWhiteboardUpdate,
   CanvasWhiteboardOptions,
   CanvasWhiteboardShapeService, CircleShape, SmileyShape, StarShape, LineShape, RectangleShape
-} from 'ng2-canvas-whiteboard';
+} from '@drizm/ng-whiteboard';
 
 @Component({
   selector: 'app-root',

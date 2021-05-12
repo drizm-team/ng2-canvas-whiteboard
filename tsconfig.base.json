@@ -16,9 +16,13 @@
       "dom"
     ],
     "paths": {
-      "ng2-canvas-whiteboard": [
-        "dist/ng2-canvas-whiteboard/ng2-canvas-whiteboard",
-        "dist/ng2-canvas-whiteboard"
+      "@drizm/ng-whiteboard/*": [
+        "projects/ng-whiteboard/*",
+        "projects/ng-whiteboard"
+      ],
+      "@drizm/ng-whiteboard": [
+        "dist/ng-whiteboard/*",
+        "dist/ng-whiteboard"
       ]
     }
   }

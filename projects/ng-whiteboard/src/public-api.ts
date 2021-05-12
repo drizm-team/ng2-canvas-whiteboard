@@ -1,5 +1,5 @@
 /*
- * Public API Surface of ng2-canvas-whiteboard
+ * Public API Surface of @drizm/ng-whiteboard
  */
 export { CanvasWhiteboardComponent } from './lib/canvas-whiteboard.component';
 export { CanvasWhiteboardUpdate } from './lib/canvas-whiteboard-update.model';

@@ -8,16 +8,16 @@
   "files": [],
   "references": [
     {
-      "path": "./projects/ng2-canvas-whiteboard/tsconfig.lib.json"
+      "path": "./projects/ng-whiteboard/tsconfig.lib.json"
     },
     {
-      "path": "./projects/ng2-canvas-whiteboard/tsconfig.spec.json"
+      "path": "./projects/ng-whiteboard/tsconfig.spec.json"
     },
     {
-      "path": "./projects/ng2-canvas-whiteboard-example/tsconfig.app.json"
+      "path": "./projects/ng-whiteboard-example/tsconfig.app.json"
     },
     {
-      "path": "./projects/ng2-canvas-whiteboard-example/tsconfig.spec.json"
+      "path": "./projects/ng-whiteboard-example/tsconfig.spec.json"
     }
-]
+  ]
 }
