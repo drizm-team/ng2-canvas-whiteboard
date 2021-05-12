@@ -1,0 +1,15 @@
+.canvas-whiteboard-shape-selector-selected-preview {
+  vertical-align: bottom;
+  display: inline-block;
+}
+
+.canvas-whiteboard-shape-selector-wrapper {
+  display: block;
+  padding: 4px;
+  border: 1px solid #afafaf;
+}
+
+@media (min-width: 401px) {
+  .canvas-whiteboard-shape-selector-wrapper {
+  }
+}

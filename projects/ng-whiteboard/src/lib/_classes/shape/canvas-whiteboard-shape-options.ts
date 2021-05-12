@@ -8,7 +8,7 @@ export class CanvasWhiteboardShapeOptions {
 
   constructor() {
     this.shouldFillShape = false;
-    this.fillStyle = null;
+    this.fillStyle = undefined;
     this.strokeStyle = 'rgba(0, 0, 0, 1)';
     this.lineWidth = 2;
     this.lineJoin = 'round';

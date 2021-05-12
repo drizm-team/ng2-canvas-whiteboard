@@ -1,7 +1,7 @@
-import { CanvasWhiteboardShape } from './canvas-whiteboard-shape';
-import { CanvasWhiteboardShapeOptions } from './canvas-whiteboard-shape-options';
-import { CanvasWhiteboardPoint } from '../canvas-whiteboard-point.model';
-import { CanvasWhiteboardUpdate } from '../canvas-whiteboard-update.model';
+import {CanvasWhiteboardShape} from './canvas-whiteboard-shape';
+import {CanvasWhiteboardShapeOptions} from './canvas-whiteboard-shape-options';
+import {CanvasWhiteboardPoint} from '../canvas-whiteboard-point.model';
+import {CanvasWhiteboardUpdate} from '../canvas-whiteboard-update.model';
 
 export class RectangleShape extends CanvasWhiteboardShape {
   width: number;
@@ -46,7 +46,7 @@ export class RectangleShape extends CanvasWhiteboardShape {
   }
 
   onUpdateReceived(update: CanvasWhiteboardUpdate): void {
-    this.width = update.x - this.positionPoint.x;
-    this.height = update.y - this.positionPoint.y;
+    this.width = update.x as number - this.positionPoint.x;
+    this.height = update.y as number - this.positionPoint.y;
   }
 }

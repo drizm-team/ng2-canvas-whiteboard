@@ -1,0 +1,58 @@
+<div class="canvas_wrapper_div">
+  <div class="canvas_whiteboard_buttons">
+    <canvas-whiteboard-shape-selector *ngIf="shapeSelectorEnabled"
+                                      [showShapeSelector]="showShapeSelector"
+                                      [selectedShapeConstructor]="selectedShapeConstructor"
+                                      [shapeOptions]="generateShapePreviewOptions()"
+                                      (toggleShapeSelector)="toggleShapeSelector($event)"
+                                      (shapeSelected)="selectShape($event)"></canvas-whiteboard-shape-selector>
+
+    <canvas-whiteboard-colorpicker *ngIf="fillColorPickerEnabled"
+                                   [previewText]="fillColorPickerText"
+                                   [showColorPicker]="showFillColorPicker"
+                                   [selectedColor]="fillColor"
+                                   (toggleColorPicker)="toggleFillColorPicker($event)"
+                                   (colorSelected)="changeFillColor($event)">
+    </canvas-whiteboard-colorpicker>
+
+    <canvas-whiteboard-colorpicker *ngIf="strokeColorPickerEnabled"
+                                   [previewText]="strokeColorPickerText"
+                                   [showColorPicker]="showStrokeColorPicker"
+                                   [selectedColor]="strokeColor"
+                                   (toggleColorPicker)="toggleStrokeColorPicker($event)"
+                                   (colorSelected)="changeStrokeColor($event)">
+    </canvas-whiteboard-colorpicker>
+
+
+    <button *ngIf="drawButtonEnabled" (click)="toggleDrawingEnabled()"
+            [class.canvas_whiteboard_button-draw_animated]="getDrawingEnabled()"
+            class="canvas_whiteboard_button canvas_whiteboard_button-draw" type="button">
+      <i [class]="drawButtonClass" aria-hidden="true"></i> {{drawButtonText}}
+    </button>
+
+    <button *ngIf="clearButtonEnabled" (click)="clearCanvasLocal()" type="button"
+            class="canvas_whiteboard_button canvas_whiteboard_button-clear">
+      <i [class]="clearButtonClass" aria-hidden="true"></i> {{clearButtonText}}
+    </button>
+
+    <button *ngIf="undoButtonEnabled" (click)="undoLocal()" type="button"
+            class="canvas_whiteboard_button canvas_whiteboard_button-undo">
+      <i [class]="undoButtonClass" aria-hidden="true"></i> {{undoButtonText}}
+    </button>
+
+    <button *ngIf="redoButtonEnabled" (click)="redoLocal()" type="button"
+            class="canvas_whiteboard_button canvas_whiteboard_button-redo">
+      <i [class]="redoButtonClass" aria-hidden="true"></i> {{redoButtonText}}
+    </button>
+    <button *ngIf="saveDataButtonEnabled" (click)="saveLocal()" type="button"
+            class="canvas_whiteboard_button canvas_whiteboard_button-save">
+      <i [class]="saveDataButtonClass" aria-hidden="true"></i> {{saveDataButtonText}}
+    </button>
+  </div>
+  <canvas #canvas class="canvas_whiteboard"></canvas>
+  <canvas #incompleteShapesCanvas class="incomplete_shapes_canvas_whiteboard"
+          (mousedown)="canvasUserEvents($event)" (mouseup)="canvasUserEvents($event)"
+          (mousemove)="canvasUserEvents($event)" (mouseout)="canvasUserEvents($event)"
+          (touchstart)="canvasUserEvents($event)" (touchmove)="canvasUserEvents($event)"
+          (touchend)="canvasUserEvents($event)" (touchcancel)="canvasUserEvents($event)"></canvas>
+</div>

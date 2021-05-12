@@ -1,4 +1,4 @@
-import {CanvasWhiteboardShapeOptions} from "./shapes/canvas-whiteboard-shape-options";
+import {CanvasWhiteboardShapeOptions} from './shape/canvas-whiteboard-shape-options';
 
 export enum CanvasWhiteboardUpdateType {
   START = 0,
@@ -7,27 +7,26 @@ export enum CanvasWhiteboardUpdateType {
 }
 
 export class CanvasWhiteboardUpdate {
-  x: number;
-  y: number;
-  type: CanvasWhiteboardUpdateType;
-  UUID: string;
+  x?: number;
+  y?: number;
+  type?: CanvasWhiteboardUpdateType;
+  UUID?: string;
+  selectedShape?: string;
+  selectedShapeOptions?: CanvasWhiteboardShapeOptions;
 
-  selectedShape: string;
-  selectedShapeOptions: CanvasWhiteboardShapeOptions;
-
-  static deserializeJson(json: any): CanvasWhiteboardUpdate {
+  static deserializeJson(json: any): CanvasWhiteboardUpdate | null {
     let parsedJson;
     try {
       parsedJson = JSON.parse(json);
       return new CanvasWhiteboardUpdate(
-        parsedJson['x'],
-        parsedJson['y'],
-        parsedJson['type'],
-        parsedJson['uuid'],
-        parsedJson['selectedShape'],
-        parsedJson['selectedShapeOptions']);
+        parsedJson.x,
+        parsedJson.y,
+        parsedJson.type,
+        parsedJson.uuid,
+        parsedJson.selectedShape,
+        parsedJson.selectedShapeOptions);
     } catch (e) {
-      console.error("The canvas whiteboard update is not parseable");
+      console.error('The canvas whiteboard update is not parseable');
       return null;
     }
   }
@@ -48,16 +47,13 @@ export class CanvasWhiteboardUpdate {
 
   stringify(): string {
     const objectToSerialize = {
-      x: this.x.toFixed(3),
-      y: this.y.toFixed(3),
+      x: this.x?.toFixed(3),
+      y: this.y?.toFixed(3),
       type: this.type,
       uuid: this.UUID,
-      selectedShape: this.selectedShape
+      selectedShape: this.selectedShape,
+      selectedShapeOptions: this.selectedShapeOptions || undefined
     };
-
-    if (this.selectedShapeOptions) {
-      objectToSerialize['selectedShapeOptions'] = this.selectedShapeOptions;
-    }
 
     return JSON.stringify(objectToSerialize);
   }

@@ -1,7 +1,7 @@
-import { CanvasWhiteboardShape } from './canvas-whiteboard-shape';
-import { CanvasWhiteboardShapeOptions } from './canvas-whiteboard-shape-options';
-import { CanvasWhiteboardPoint } from '../canvas-whiteboard-point.model';
-import { CanvasWhiteboardUpdate } from '../canvas-whiteboard-update.model';
+import {CanvasWhiteboardShape} from './canvas-whiteboard-shape';
+import {CanvasWhiteboardShapeOptions} from './canvas-whiteboard-shape-options';
+import {CanvasWhiteboardPoint} from '../canvas-whiteboard-point.model';
+import {CanvasWhiteboardUpdate} from '../canvas-whiteboard-update.model';
 
 export class CircleShape extends CanvasWhiteboardShape {
   radius: number;
@@ -36,7 +36,7 @@ export class CircleShape extends CanvasWhiteboardShape {
   }
 
   onUpdateReceived(update: CanvasWhiteboardUpdate): void {
-    this.radius = this.calculateRadius(update.x, update.y);
+    this.radius = this.calculateRadius(update.x as number, update.y as number);
   }
 
   calculateRadius(x: number, y: number): number {

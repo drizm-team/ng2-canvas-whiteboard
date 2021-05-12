@@ -1,7 +1,7 @@
-import { CanvasWhiteboardShape } from './canvas-whiteboard-shape';
-import { CanvasWhiteboardShapeOptions } from './canvas-whiteboard-shape-options';
-import { CanvasWhiteboardPoint } from '../canvas-whiteboard-point.model';
-import { CanvasWhiteboardUpdate } from '../canvas-whiteboard-update.model';
+import {CanvasWhiteboardShape} from './canvas-whiteboard-shape';
+import {CanvasWhiteboardShapeOptions} from './canvas-whiteboard-shape-options';
+import {CanvasWhiteboardPoint} from '../canvas-whiteboard-point.model';
+import {CanvasWhiteboardUpdate} from '../canvas-whiteboard-update.model';
 
 export class FreeHandShape extends CanvasWhiteboardShape {
   linePositions: CanvasWhiteboardPoint[];
@@ -66,6 +66,6 @@ export class FreeHandShape extends CanvasWhiteboardShape {
   }
 
   onUpdateReceived(update: CanvasWhiteboardUpdate): void {
-    this.linePositions.push(new CanvasWhiteboardPoint(update.x, update.y));
+    this.linePositions.push(new CanvasWhiteboardPoint(update.x as number, update.y as number));
   }
 }

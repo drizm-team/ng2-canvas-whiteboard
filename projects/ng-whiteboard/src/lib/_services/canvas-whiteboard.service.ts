@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanvasWhiteboardUpdate } from './canvas-whiteboard-update.model';
+import { CanvasWhiteboardUpdate } from '../_classes/canvas-whiteboard-update.model';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable()

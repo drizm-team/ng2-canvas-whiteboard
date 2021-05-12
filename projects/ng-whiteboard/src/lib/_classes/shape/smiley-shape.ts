@@ -1,7 +1,7 @@
-import { CanvasWhiteboardShape } from './canvas-whiteboard-shape';
-import { CanvasWhiteboardShapeOptions } from './canvas-whiteboard-shape-options';
-import { CanvasWhiteboardPoint } from '../canvas-whiteboard-point.model';
-import { CanvasWhiteboardUpdate } from '../canvas-whiteboard-update.model';
+import {CanvasWhiteboardShape} from './canvas-whiteboard-shape';
+import {CanvasWhiteboardShapeOptions} from './canvas-whiteboard-shape-options';
+import {CanvasWhiteboardPoint} from '../canvas-whiteboard-point.model';
+import {CanvasWhiteboardUpdate} from '../canvas-whiteboard-update.model';
 
 export class SmileyShape extends CanvasWhiteboardShape {
   radius: number;
@@ -35,7 +35,7 @@ export class SmileyShape extends CanvasWhiteboardShape {
 
     context.arc(leftEyeX, eyesY, eyeSize, 0, 2 * Math.PI, false);
     context.arc(rightEyeX, eyesY, eyeSize, 0, 2 * Math.PI, false);
-    context.fillStyle = this.options.strokeStyle;
+    context.fillStyle = this.options.strokeStyle as string;
     context.fill();
 
     // draw the mouth
@@ -53,7 +53,7 @@ export class SmileyShape extends CanvasWhiteboardShape {
   }
 
   onUpdateReceived(update: CanvasWhiteboardUpdate): void {
-    this.radius = this.calculateRadius(update.x, update.y);
+    this.radius = this.calculateRadius(update.x as number, update.y as number);
   }
 
   calculateRadius(x: number, y: number): number {

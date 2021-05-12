@@ -1,0 +1,13 @@
+<div *ngIf="!showShapeSelector" (click)="doToggleShapeSelector($event)"
+     class="canvas-whiteboard-shape-selector-selected-preview">
+  <canvas-whiteboard-shape-preview
+    [shapeConstructor]="selectedShapeConstructor"
+    [shapeOptions]="shapeOptions"></canvas-whiteboard-shape-preview>
+</div>
+<div class="canvas-whiteboard-shape-selector-wrapper" *ngIf="showShapeSelector">
+  <canvas-whiteboard-shape-preview
+    *ngFor="let shapeConstructor of registeredShapes$ | async"
+    [shapeConstructor]="shapeConstructor"
+    [shapeOptions]="shapeOptions"
+    (click)="selectShape(shapeConstructor)"></canvas-whiteboard-shape-preview>
+</div>

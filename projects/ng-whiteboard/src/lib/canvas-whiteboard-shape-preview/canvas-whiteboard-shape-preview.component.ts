@@ -7,28 +7,22 @@ import {
   OnChanges,
   SimpleChanges
 } from '@angular/core';
-import { INewCanvasWhiteboardShape } from './canvas-whiteboard-shape.service';
-import { CanvasWhiteboardShape } from './canvas-whiteboard-shape';
-import { CanvasWhiteboardPoint } from '../canvas-whiteboard-point.model';
-import { CanvasWhiteboardShapeOptions } from './canvas-whiteboard-shape-options';
+import {INewCanvasWhiteboardShape} from '../_services/canvas-whiteboard-shape.service';
+import {CanvasWhiteboardShape} from '../_classes/shape/canvas-whiteboard-shape';
+import {CanvasWhiteboardPoint} from '../_classes/canvas-whiteboard-point.model';
+import {CanvasWhiteboardShapeOptions} from '../_classes/shape/canvas-whiteboard-shape-options';
+
 
 @Component({
   selector: 'canvas-whiteboard-shape-preview',
-  template: `
-    <canvas #canvasWhiteboardShapePreview width="50px" height="50px"
-            class="canvas-whiteboard-shape-preview-canvas"></canvas>
-  `,
-  styles: [`
-    .canvas-whiteboard-shape-preview-canvas {
-      cursor: pointer;
-    }
-  `]
+  templateUrl: './canvas-whiteboard-shape-preview.component.html',
+  styleUrls: ['./canvas-whiteboard-shape-preview.component.scss']
 })
 export class CanvasWhiteboardShapePreviewComponent implements AfterViewInit, OnChanges {
-  @Input() readonly shapeConstructor: INewCanvasWhiteboardShape<CanvasWhiteboardShape>;
-  @Input() readonly shapeOptions: CanvasWhiteboardShapeOptions;
+  @Input() readonly shapeConstructor!: INewCanvasWhiteboardShape<CanvasWhiteboardShape>;
+  @Input() readonly shapeOptions!: CanvasWhiteboardShapeOptions;
 
-  @ViewChild('canvasWhiteboardShapePreview') canvas: ElementRef;
+  @ViewChild('canvasWhiteboardShapePreview') canvas!: ElementRef;
 
   ngAfterViewInit(): void {
     this.drawShapePreview();

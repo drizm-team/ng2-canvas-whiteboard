@@ -1,0 +1,10 @@
+<div [hidden]="showColorPicker" class="canvas-whiteboard-colorpicker-input"
+     (click)="doToggleColorPicker($event)">
+  <div class="selected-color-type-wrapper">{{previewText}}</div>
+  <div class="selected-color-preview" [style.background]="selectedColor"></div>
+</div>
+<div [hidden]="!showColorPicker" class="canvas-whiteboard-colorpicker-wrapper">
+  <div (click)="selectColor('transparent')" class="transparent-color">Transparent</div>
+  <canvas #canvaswhiteboardcolorpicker class="canvas-whiteboard-colorpicker" width="284" height="155"
+          (click)="selectColor(determineColorFromCanvas($event))"></canvas>
+</div>
