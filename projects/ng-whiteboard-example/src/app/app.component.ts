@@ -40,18 +40,19 @@ export class AppComponent {
       // Parse the string, and get an Array<string>
       const parsedStorageUpdates: Array<string> = JSON.parse(canvasDrawingsJson);
       // Parse each string inside the Array<string>, and get an Array<CanvasWhiteboardUpdate>
-      const updates: Array<CanvasWhiteboardUpdate> = parsedStorageUpdates.map(updateJSON =>
+      const updates: Array<CanvasWhiteboardUpdate | null> = parsedStorageUpdates.map(updateJSON =>
         CanvasWhiteboardUpdate.deserializeJson(updateJSON));
-      // Draw the updates onto the canvas
-      this.canvasWhiteboardService.drawCanvas(updates);
+      if (!updates.some(u => u === null)) {
+        // Draw the updates onto the canvas
+        this.canvasWhiteboardService.drawCanvas(updates as CanvasWhiteboardUpdate[]);
+      }
     }
   }
 
   public changeOptions(): void {
     this.canvasOptions = {
       ...this.canvasOptions,
-      fillColorPickerEnabled: false,
-      colorPickerEnabled: false
+      fillColorPickerEnabled: false
     };
   }
 }

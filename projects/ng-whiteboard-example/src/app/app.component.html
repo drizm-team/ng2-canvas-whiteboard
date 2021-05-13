@@ -4,7 +4,7 @@
 
 <div style="width: 300px; height: 300px; border: 1px solid black">
 
-  <canvas-whiteboard #canvasWhiteboard
+  <drizm-whiteboard #canvasWhiteboard
                      [options]="canvasOptions"
                      [drawButtonClass]="'drawButtonClass'"
                      [drawButtonText]="'Draw'"
@@ -16,12 +16,11 @@
                      [redoButtonEnabled]="true"
                      [fillColorPickerText]="'Filled'"
                      [strokeColorPickerText]="'Stroked'"
-                     [colorPickerEnabled]="true"
                      [strokeColorPickerEnabled]="true"
                      [saveDataButtonEnabled]="true"
                      [saveDataButtonText]="'Save'"
                      [lineWidth]="5"
                      [strokeColor]="'rgb(0,0,0)'"
                      [shouldDownloadDrawing]="true">
-  </canvas-whiteboard>
+  </drizm-whiteboard>
 </div>
