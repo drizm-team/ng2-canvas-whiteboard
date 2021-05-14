@@ -1,26 +1,29 @@
 <div class="canvas_wrapper_div">
   <div class="canvas_whiteboard_buttons">
-    <canvas-whiteboard-shape-selector *ngIf="shapeSelectorEnabled"
-                                      [showShapeSelector]="showShapeSelector"
-                                      [selectedShapeConstructor]="selectedShapeConstructor"
-                                      [shapeOptions]="generateShapePreviewOptions()"
-                                      (toggleShapeSelector)="toggleShapeSelector($event)"
-                                      (shapeSelected)="selectShape($event)"></canvas-whiteboard-shape-selector>
+    <canvas-whiteboard-shape-selector
+      *ngIf="shapeSelectorEnabled"
+      [showShapeSelector]="showShapeSelector"
+      [selectedShapeConstructor]="selectedShapeConstructor"
+      [shapeOptions]="generateShapePreviewOptions()"
+      (toggleShapeSelector)="toggleShapeSelector($event)"
+      (shapeSelected)="selectShape($event)"></canvas-whiteboard-shape-selector>
 
-    <canvas-whiteboard-colorpicker *ngIf="fillColorPickerEnabled"
-                                   [previewText]="fillColorPickerText"
-                                   [showColorPicker]="showFillColorPicker"
-                                   [selectedColor]="fillColor"
-                                   (toggleColorPicker)="toggleFillColorPicker($event)"
-                                   (colorSelected)="changeFillColor($event)">
+    <canvas-whiteboard-colorpicker
+      *ngIf="fillColorPickerEnabled"
+      [previewText]="fillColorPickerText"
+      [showColorPicker]="showFillColorPicker"
+      [selectedColor]="fillColor"
+      (toggleColorPicker)="toggleFillColorPicker($event)"
+      (colorSelected)="changeFillColor($event)">
     </canvas-whiteboard-colorpicker>
 
-    <canvas-whiteboard-colorpicker *ngIf="strokeColorPickerEnabled"
-                                   [previewText]="strokeColorPickerText"
-                                   [showColorPicker]="showStrokeColorPicker"
-                                   [selectedColor]="strokeColor"
-                                   (toggleColorPicker)="toggleStrokeColorPicker($event)"
-                                   (colorSelected)="changeStrokeColor($event)">
+    <canvas-whiteboard-colorpicker
+      *ngIf="strokeColorPickerEnabled"
+      [previewText]="strokeColorPickerText"
+      [showColorPicker]="showStrokeColorPicker"
+      [selectedColor]="strokeColor"
+      (toggleColorPicker)="toggleStrokeColorPicker($event)"
+      (colorSelected)="changeStrokeColor($event)">
     </canvas-whiteboard-colorpicker>
 
 

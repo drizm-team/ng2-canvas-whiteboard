@@ -537,7 +537,7 @@ export class CanvasWhiteboardComponent implements OnInit, AfterViewInit, OnChang
    * This method can be called if the canvas component is a ViewChild of some other component.
    * This method will work even if the redo button has been disabled
    */
-  doRedo(callbackFn?: (arg: string) => any): void {
+  private doRedo(callbackFn?: (arg: string) => any): void {
     if (!this._redoStack.length) {
       return;
     }
