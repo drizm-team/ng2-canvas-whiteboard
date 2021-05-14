@@ -1,5 +1,5 @@
 <div class="canvas_wrapper_div">
-  <div class="canvas_whiteboard_buttons">
+  <div class="canvas_whiteboard_buttons" *ngIf="!customWhiteboardUi; else customWhiteboardUi">
     <canvas-whiteboard-shape-selector
       *ngIf="shapeSelectorEnabled"
       [showShapeSelector]="showShapeSelector"
@@ -52,10 +52,13 @@
       <i [class]="saveDataButtonClass" aria-hidden="true"></i> {{saveDataButtonText}}
     </button>
   </div>
+
   <canvas #canvas class="canvas_whiteboard"></canvas>
-  <canvas #incompleteShapesCanvas class="incomplete_shapes_canvas_whiteboard"
-          (mousedown)="canvasUserEvents($event)" (mouseup)="canvasUserEvents($event)"
-          (mousemove)="canvasUserEvents($event)" (mouseout)="canvasUserEvents($event)"
-          (touchstart)="canvasUserEvents($event)" (touchmove)="canvasUserEvents($event)"
-          (touchend)="canvasUserEvents($event)" (touchcancel)="canvasUserEvents($event)"></canvas>
+  <canvas
+    #incompleteShapesCanvas class="incomplete_shapes_canvas_whiteboard"
+    (mousedown)="canvasUserEvents($event)" (mouseup)="canvasUserEvents($event)"
+    (mousemove)="canvasUserEvents($event)" (mouseout)="canvasUserEvents($event)"
+    (touchstart)="canvasUserEvents($event)" (touchmove)="canvasUserEvents($event)"
+    (touchend)="canvasUserEvents($event)" (touchcancel)="canvasUserEvents($event)">
+  </canvas>
 </div>

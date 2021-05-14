@@ -6,7 +6,7 @@ import {
   ViewChild,
   ElementRef,
   OnInit,
-  OnChanges, OnDestroy, AfterViewInit, NgZone, ChangeDetectorRef
+  OnChanges, OnDestroy, AfterViewInit, NgZone, ChangeDetectorRef, TemplateRef
 } from '@angular/core';
 import {CanvasWhiteboardUpdate, CanvasWhiteboardUpdateType} from './_classes/canvas-whiteboard-update.model';
 import {CanvasWhiteboardService} from './_services/canvas-whiteboard.service';
@@ -23,7 +23,8 @@ import {cloneDeep, isEqual} from 'lodash-es';
 @Component({
   selector: 'drizm-whiteboard',
   templateUrl: './canvas-whiteboard.component.html',
-  styleUrls: ['./canvas-whiteboard.component.scss']
+  styleUrls: ['./canvas-whiteboard.component.scss'],
+  viewProviders: [CanvasWhiteboardComponent]
 })
 export class CanvasWhiteboardComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
   @Input() options?: CanvasWhiteboardOptions;
@@ -42,6 +43,7 @@ export class CanvasWhiteboardComponent implements OnInit, AfterViewInit, OnChang
     return this._imageUrl;
   }
 
+  @Input() customWhiteboardUi?: TemplateRef<any>;
   @Input() aspectRatio?: number;
   @Input() drawButtonClass?: string;
   @Input() clearButtonClass?: string;
