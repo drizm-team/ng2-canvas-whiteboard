@@ -1,6 +1,6 @@
 {
   "name": "ng-whiteboard-workspace",
-  "version": "4.0.2",
+  "version": "4.2.0",
   "scripts": {
     "build:ng2-canvas-whiteboard:prod": "ng build ng-whiteboard --prod",
     "test:ng2-canvas-whiteboard": "ng test ng-whiteboard",

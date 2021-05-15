@@ -1,24 +1,13 @@
 # Forked from ng2-canvas-whiteboard
 
-## Canvas version changes
-#### v4.0.2 merges PR to add variables for fillColorPickerText and strokeColorPickerText
-https://github.com/webfactorymk/ng2-canvas-whiteboard/pull/68
+## Changelog
+#### v4.2.0 Remove drawing with middle mouse button
+This allows for implementing a dragging mechanism
 
-#### v3.1.3, v4.0.1
-Exports all existing canvas shapes, so that they can be easily unregistered from the canvas. (see README for unregistering the shapes).
-
-Also, this version introduces two new Inputs,  `strokeColorPickerEnabled: boolean` and `fillColorPickerEnabled: boolean`, also deprecates the `colorPickerEnabled` Input.
-
-For the sake of reverse-compat, the `colorPickerEnabled` input is still there and it will be used in combination with the two new variables. (ex: `colorPickerEnabled || fillColorPickerEnabled`). 
-
-#### v3.1.1 Audits the npm packages and upgrades the lodash version from 4.17.11 to 4.17.13
-
-#### v3.1.0 Merges the pull request from https://github.com/webfactorymk/ng2-canvas-whiteboard/pull/55 to allow the component to be used in Angular 8 and 9 applications. Also fixes the imports for rxjs items from 'rxjs/index' to 'rxjs'
-
-#### v3.0.4 Fixes a bug with production build and recognition of shape names by adding an abstract method in the base Shape class.
-
-#### v3.0.0 Removes the `rxjs-compat` library and adds `rxjs^6`. This means that older versions will not be supported if they upgrade to `ng2-canvas-whiteboard^3.0.0`.
-#### *This version also changes the way of how this library is built and made ready for publish.*
+#### v4.1.0 Application refactor and custom UI template
+- Updated to Angular 12
+- Added TypeScript strict mode
+- Added the option of adding a custom UI template (replaces the buttons) via the customWhiteboardUi input
 
 #### For applications before Angular 6 please use versions below v3.0.0.
 
@@ -31,8 +20,9 @@ For the sake of reverse-compat, the `colorPickerEnabled` input is still there an
 - Sends outputs on every action.
 - Contains inputs for multiple modifications.
 - Save drawn images
+- Custom UI template
 
-# Install
+## Installation
 
 1. Install npm module:
 
@@ -77,6 +67,7 @@ In the html file, you can insert the Canvas Whiteboard
 
 ```html
 <drizm-whiteboard #canvasWhiteboard
+                     [customWhiteboardUi]="customWhiteboardUiT"
                      [drawButtonClass]="'drawButtonClass'"
                      [drawButtonText]="'Draw'"
                      [clearButtonClass]="'clearButtonClass'"
@@ -98,6 +89,8 @@ In the html file, you can insert the Canvas Whiteboard
                      (undo)="onCanvasUndo($event)"
                      (redo)="onCanvasRedo($event)">
 </drizm-whiteboard>
+
+<ng-template #customWhiteboardUiT></ng-template>
 ```
 
 If there is too much overhead with inputs, you can just specify the [options] input, and specify the options from the typescript code
@@ -115,6 +108,7 @@ Example:
 Code:
 ```typescript
   canvasOptions: CanvasWhiteboardOptions = {
+    customWhiteboardUi: this.customWhiteboardUiT,
     drawButtonEnabled: true,
     drawButtonClass: "drawButtonClass",
     drawButtonText: "Draw",
@@ -153,6 +147,10 @@ This path can either be a base64 string or an actual path to a resource
 
 ##### `aspectRatio: number` (optional)
 If specified, the canvas will be resized according to this ratio
+
+#### `customWhiteboardUi: TemplateRef<any>` (optional)
+If specified, replaces whiteboard buttons with your custom template. To add undo/redo etc. triggers you can get CanvaswhiteboardComponent like this:
+`@ViewChild('canvasWhiteboard') canvasWhiteboard: CanvasWhiteboardComponent;` and use its public redoLocal and undoLocal methods, along with others.
 
 ##### `drawButtonClass: string`<br/>`clearButtonClass: string` <br/>`undoButtonClass: string` <br/>`redoButtonClass: string`<br/>`saveDataButtonClass: string`
 The classes of the draw, clear, undo and redo buttons. These classes are used in "\<i>" tags. <br/>
@@ -237,10 +235,6 @@ If using component-only styles, for this to work the viewEncapsulation must be s
 ```
 
 You can also use the `::ng-deep` selector if you do not want to change the ViewEncapsulation property on the component.
-
-##### Deprecated: `colorPickerEnabled: boolean` (default: false)
-This allows the adding of a colorPickers that the user can choose to draw with (stroke and fill color),
-and the original colors will be used when redrawing
 
 ##### `fillColorPickerEnabled: boolean` (default: false)
 This shows/hides the fill color picker. Note: if this field has been to `false`, but the `colorPickerEnabled` field has been to `true`, the color picker will be shown, as per reverse-compat needs.

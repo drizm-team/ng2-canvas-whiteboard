@@ -594,6 +594,11 @@ export class CanvasWhiteboardComponent implements OnInit, AfterViewInit, OnChang
       return;
     }
 
+    // Ignore the middle mouse button
+    if (event.button === 1) {
+      return;
+    }
+
     if (event.target === this._incompleteShapesCanvas.nativeElement || event.target === this.canvas.nativeElement) {
       event.preventDefault();
     }

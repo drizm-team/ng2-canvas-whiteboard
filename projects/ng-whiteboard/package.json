@@ -1,6 +1,6 @@
 {
   "name": "@drizm/ng-whiteboard",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "author": "Dominik Lewandowski, webfactory(forked)",
   "license": "MIT",
   "description": "A Canvas component for Angular which supports free drawing.",
