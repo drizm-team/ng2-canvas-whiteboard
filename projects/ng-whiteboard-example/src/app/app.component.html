@@ -2,25 +2,28 @@
 <button (click)="loadFromStorage()">Load from storage</button>
 <button (click)="changeOptions()">Update canvas options</button>
 
-<div style="width: 300px; height: 300px; border: 1px solid black">
+<div style="width: 1200px; height: 1200px; border: 1px solid black; margin: auto;">
 
-  <drizm-whiteboard #canvasWhiteboard
-                     [options]="canvasOptions"
-                     [drawButtonClass]="'drawButtonClass'"
-                     [drawButtonText]="'Draw'"
-                     [clearButtonClass]="'clearButtonClass'"
-                     [clearButtonText]="'Clear'"
-                     [undoButtonText]="'Undo'"
-                     [undoButtonEnabled]="true"
-                     [redoButtonText]="'Redo'"
-                     [redoButtonEnabled]="true"
-                     [fillColorPickerText]="'Filled'"
-                     [strokeColorPickerText]="'Stroked'"
-                     [strokeColorPickerEnabled]="true"
-                     [saveDataButtonEnabled]="true"
-                     [saveDataButtonText]="'Save'"
-                     [lineWidth]="5"
-                     [strokeColor]="'rgb(0,0,0)'"
-                     [shouldDownloadDrawing]="true">
+  <drizm-whiteboard
+    #canvasWhiteboard
+    [options]="canvasOptions"
+    [drawButtonClass]="'drawButtonClass'"
+    [drawButtonText]="'Draw'"
+    [clearButtonClass]="'clearButtonClass'"
+    [clearButtonText]="'Clear'"
+    [eraseButtonClass]="'eraseButtonClass'"
+    [eraseButtonText]="'Erase'"
+    [eraseButtonEnabled]="true"
+    [undoButtonText]="'Undo'"
+    [undoButtonEnabled]="true"
+    [redoButtonText]="'Redo'"
+    [redoButtonEnabled]="true"
+    [fillColorPickerText]="'Filled'"
+    [strokeColorPickerText]="'Stroked'"
+    [strokeColorPickerEnabled]="true"
+    [saveDataButtonEnabled]="true"
+    [saveDataButtonText]="'Save'"
+    [strokeColor]="'rgb(0,0,0)'"
+    [shouldDownloadDrawing]="true">
   </drizm-whiteboard>
 </div>

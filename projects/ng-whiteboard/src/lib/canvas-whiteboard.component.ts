@@ -47,11 +47,13 @@ export class CanvasWhiteboardComponent implements OnInit, AfterViewInit, OnChang
   @Input() aspectRatio?: number;
   @Input() drawButtonClass?: string;
   @Input() clearButtonClass?: string;
+  @Input() eraseButtonClass?: string;
   @Input() undoButtonClass?: string;
   @Input() redoButtonClass?: string;
   @Input() saveDataButtonClass?: string;
   @Input() drawButtonText = '';
   @Input() clearButtonText = '';
+  @Input() eraseButtonText = '';
   @Input() undoButtonText = '';
   @Input() redoButtonText = '';
   @Input() saveDataButtonText = '';
@@ -59,6 +61,7 @@ export class CanvasWhiteboardComponent implements OnInit, AfterViewInit, OnChang
   @Input() fillColorPickerText = 'Fill';
   @Input() drawButtonEnabled = true;
   @Input() clearButtonEnabled = true;
+  @Input() eraseButtonEnabled = true;
   @Input() undoButtonEnabled = false;
   @Input() redoButtonEnabled = false;
   @Input() saveDataButtonEnabled = false;
@@ -66,10 +69,17 @@ export class CanvasWhiteboardComponent implements OnInit, AfterViewInit, OnChang
   @Input() strokeColorPickerEnabled = false;
   @Input() fillColorPickerEnabled = false;
   @Input() lineWidth = 2;
+  @Input() eraserLineWidth = 10;
   @Input() strokeColor = 'rgba(0, 0, 0, 1)';
   @Input() startingColor = '#fff';
   @Input() scaleFactor = 0;
   @Input() drawingEnabled = false;
+
+  @Input() set erasingEnabled(value: boolean) {
+    this._erasingEnabled = value;
+    this._setErasing(value);
+  }
+
   @Input() showStrokeColorPicker = false;
   @Input() showFillColorPicker = false;
   @Input() downloadedFileName?: string;
@@ -90,13 +100,18 @@ export class CanvasWhiteboardComponent implements OnInit, AfterViewInit, OnChang
   @ViewChild('canvas', {static: true}) canvas!: ElementRef;
   context!: CanvasRenderingContext2D;
 
-  @ViewChild('incompleteShapesCanvas', {static: true}) private _incompleteShapesCanvas!: ElementRef;
+  @ViewChild('incompleteShapesCanvas', {static: true})
+  private _incompleteShapesCanvas!: ElementRef;
+
+  cachedStrokeColor = '';
+
   private _incompleteShapesCanvasContext!: CanvasRenderingContext2D;
   private _incompleteShapesMap: Map<string, CanvasWhiteboardShape>;
 
   private _imageElement: any;
 
   private _canDraw = true;
+  private _erasingEnabled = false;
 
   private _clientDragging = false;
 
@@ -173,6 +188,21 @@ export class CanvasWhiteboardComponent implements OnInit, AfterViewInit, OnChang
    */
   private _initInputsFromOptions(options: CanvasWhiteboardOptions | undefined): void {
     if (options) {
+      if (!this._isNullOrUndefined(options.eraserLineWidth)) {
+        this.eraserLineWidth = options.eraserLineWidth;
+      }
+      if (!this._isNullOrUndefined(options.eraseButtonClass)) {
+        this.eraseButtonClass = options.eraseButtonClass;
+      }
+      if (!this._isNullOrUndefined(options.eraseButtonText)) {
+        this.eraseButtonText = options.eraseButtonText;
+      }
+      if (!this._isNullOrUndefined(options.erasingEnabled)) {
+        this.erasingEnabled = options.erasingEnabled;
+      }
+      if (!this._isNullOrUndefined(options.customWhiteboardUi)) {
+        this.customWhiteboardUi = options.customWhiteboardUi;
+      }
       if (!this._isNullOrUndefined(options.batchUpdateTimeoutDuration)) {
         this.batchUpdateTimeoutDuration = options.batchUpdateTimeoutDuration;
       }
@@ -445,6 +475,9 @@ export class CanvasWhiteboardComponent implements OnInit, AfterViewInit, OnChang
    */
   toggleDrawingEnabled(): void {
     this.drawingEnabled = !this.drawingEnabled;
+    if (this.drawingEnabled && this.erasingEnabled) {
+      this.erasingEnabled = false;
+    }
   }
 
   /**
@@ -452,6 +485,19 @@ export class CanvasWhiteboardComponent implements OnInit, AfterViewInit, OnChang
    */
   setDrawingEnabled(drawingEnabled: boolean): void {
     this.drawingEnabled = drawingEnabled;
+    if (this.drawingEnabled && this.erasingEnabled) {
+      this.erasingEnabled = false;
+    }
+  }
+
+  /**
+   * Toggles erasing on the canvas. It is called via the erase button on the canvas.
+   */
+  toggleErasingEnabled(): void {
+    this.erasingEnabled = !this._erasingEnabled;
+    if (this.drawingEnabled && this.erasingEnabled) {
+      this.setDrawingEnabled(false);
+    }
   }
 
   /**
@@ -577,8 +623,8 @@ export class CanvasWhiteboardComponent implements OnInit, AfterViewInit, OnChang
    *
    */
   canvasUserEvents(event: any): void {
-    // Ignore all if we didn't click the _draw! button or the image did not load
-    if (!this.drawingEnabled || !this._canDraw) {
+    // Ignore all if we don't have drawing/erasing enabled or the image did not load
+    if ((!this.drawingEnabled && !this._erasingEnabled) || !this._canDraw) {
       return;
     }
 
@@ -838,7 +884,9 @@ export class CanvasWhiteboardComponent implements OnInit, AfterViewInit, OnChang
     if (!update.selectedShapeOptions) {
       // Make a deep copy since we don't want some Shape implementation to change something by accident
       update.selectedShapeOptions = Object.assign(new CanvasWhiteboardShapeOptions(),
-        this.generateShapePreviewOptions(), {lineWidth: this.lineWidth});
+        this.generateShapePreviewOptions(), {
+        lineWidth: this.erasingEnabled ? this.eraserLineWidth : this.lineWidth
+      });
     }
   }
 
@@ -848,7 +896,7 @@ export class CanvasWhiteboardComponent implements OnInit, AfterViewInit, OnChang
         shouldFillShape: !!this.fillColor,
         fillStyle: this.fillColor,
         strokeStyle: this.strokeColor,
-        lineWidth: 2,
+        lineWidth: this.lineWidth,
         lineJoin: this.lineJoin,
         lineCap: this.lineCap
       });
@@ -1137,6 +1185,25 @@ export class CanvasWhiteboardComponent implements OnInit, AfterViewInit, OnChang
     return cloneDeep(this._updateHistory);
   }
 
+  private _setErasing(value: boolean): void {
+    if (value) {
+      // Draw invisible lines to imitate erasing
+      this.context.globalCompositeOperation = 'destination-out';
+      this.cachedStrokeColor = (' ' + this.strokeColor).slice(1);
+      this.changeStrokeColor('rgba(255,255,255,1)');
+      this.changeDetectorRef.detectChanges();
+
+      console.log('stroke changed to white', this.strokeColor, this.cachedStrokeColor);
+    } else {
+      // Return to default values
+      this.context.globalCompositeOperation = 'source-over';
+      this.changeStrokeColor((' ' + this.cachedStrokeColor).slice(1));
+      this.cachedStrokeColor = '';
+      this.changeDetectorRef.detectChanges();
+      console.log('stroke back to normal', this.strokeColor, this.cachedStrokeColor);
+    }
+  }
+
   /**
    * Unsubscribe from a given subscription if it is active
    */
@@ -1155,5 +1222,10 @@ export class CanvasWhiteboardComponent implements OnInit, AfterViewInit, OnChang
     return Math.floor((1 + Math.random()) * 0x10000)
       .toString(16)
       .substring(1);
+  }
+
+  // tslint:disable-next-line:adjacent-overload-signatures
+  get erasingEnabled(): boolean {
+    return this._erasingEnabled;
   }
 }
