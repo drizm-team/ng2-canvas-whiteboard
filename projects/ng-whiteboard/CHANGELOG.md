@@ -1,5 +1,13 @@
 
 ## Canvas version changes
+#### v4.3.1 Experimental eraser
+- Fixed doRedo being a private method
+- Added experimental eraser functionality:\
+  eraserLineWidth?: number;\
+  eraseButtonEnabled?: boolean;\
+  eraseButtonClass?: string;\
+  eraseButtonText?: string;
+  
 #### v4.2.0 Remove drawing with middle mouse button
 This allows for implementing a dragging mechanism
 

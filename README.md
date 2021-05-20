@@ -1,6 +1,14 @@
 # Forked from ng2-canvas-whiteboard
 
 ## Changelog
+#### v4.3.1 Experimental eraser
+- Fixed doRedo being a private method
+- Added experimental eraser functionality:\
+  eraserLineWidth?: number;\
+  eraseButtonEnabled?: boolean;\
+  eraseButtonClass?: string;\
+  eraseButtonText?: string;
+
 #### v4.2.0 Remove drawing with middle mouse button
 This allows for implementing a dragging mechanism
 
@@ -21,6 +29,7 @@ This allows for implementing a dragging mechanism
 - Contains inputs for multiple modifications.
 - Save drawn images
 - Custom UI template
+- Eraser(experimental)
 
 ## Installation
 
@@ -126,7 +135,11 @@ Code:
     saveDataButtonText: "Save",
     lineWidth: 5,
     strokeColor: "rgb(0,0,0)",
-    shouldDownloadDrawing: true
+    shouldDownloadDrawing: true,
+    eraserLineWidth: "10",
+    eraseButtonEnabled: true,
+    eraseButtonClass: "eraseButtonClass",
+    eraseButtonText: "Erase"
   };
 ```
 
@@ -152,17 +165,17 @@ If specified, the canvas will be resized according to this ratio
 If specified, replaces whiteboard buttons with your custom template. To add undo/redo etc. triggers you can get CanvaswhiteboardComponent like this:
 `@ViewChild('canvasWhiteboard') canvasWhiteboard: CanvasWhiteboardComponent;` and use its public redoLocal and undoLocal methods, along with others.
 
-##### `drawButtonClass: string`<br/>`clearButtonClass: string` <br/>`undoButtonClass: string` <br/>`redoButtonClass: string`<br/>`saveDataButtonClass: string`
+##### `drawButtonClass: string`<br/>`clearButtonClass: string` <br/>`undoButtonClass: string` <br/>`redoButtonClass: string`<br/>`saveDataButtonClass: string` <br/>`eraseButtonClass: string`
 The classes of the draw, clear, undo and redo buttons. These classes are used in "\<i>" tags. <br/>
 Example:  
 ```html
 [drawButtonClass]="'fa fa-pencil fa-2x'"
 [clearButtonClass]="'fa fa-eraser fa-2x canvas_whiteboard_button-clear'"
    ```
-##### `drawButtonEnabled: boolean` (default: true) <br/>`clearButtonEnabled: boolean` (default: true) <br/>`undoButtonEnabled: boolean` (default: false)<br/>`redoButtonEnabled: boolean` (default: false)<br/>`saveDataButtonEnabled: boolean` (default: false)
+##### `drawButtonEnabled: boolean` (default: true) <br/>`clearButtonEnabled: boolean` (default: true) <br/>`eraseButtonEnabled: boolean` (default: true) <br/>`undoButtonEnabled: boolean` (default: false)<br/>`redoButtonEnabled: boolean` (default: false)<br/>`saveDataButtonEnabled: boolean` (default: false)
 Specifies whether or not the button for drawing or clearing the canvas should be shown.
 
-##### `drawButtonText, clearButtonText, undoButtonText, redoButtonText, saveDataButtonText`
+##### `drawButtonText, clearButtonText, undoButtonText, redoButtonText, saveDataButtonText, eraseButtonText`
 Specify the text to add to the buttons, default is no text
 ```html
 [drawButtonText]="'Draw'"
