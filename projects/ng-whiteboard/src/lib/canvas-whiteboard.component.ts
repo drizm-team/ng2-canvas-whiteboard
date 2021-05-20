@@ -585,7 +585,7 @@ export class CanvasWhiteboardComponent implements OnInit, AfterViewInit, OnChang
    * This method can be called if the canvas component is a ViewChild of some other component.
    * This method will work even if the redo button has been disabled
    */
-  private doRedo(callbackFn?: (arg: string) => any): void {
+  doRedo(callbackFn?: (arg: string) => any): void {
     if (!this._redoStack.length) {
       return;
     }
@@ -1192,15 +1192,12 @@ export class CanvasWhiteboardComponent implements OnInit, AfterViewInit, OnChang
       this.cachedStrokeColor = (' ' + this.strokeColor).slice(1);
       this.changeStrokeColor('rgba(255,255,255,1)');
       this.changeDetectorRef.detectChanges();
-
-      console.log('stroke changed to white', this.strokeColor, this.cachedStrokeColor);
     } else {
       // Return to default values
       this.context.globalCompositeOperation = 'source-over';
       this.changeStrokeColor((' ' + this.cachedStrokeColor).slice(1));
       this.cachedStrokeColor = '';
       this.changeDetectorRef.detectChanges();
-      console.log('stroke back to normal', this.strokeColor, this.cachedStrokeColor);
     }
   }
 

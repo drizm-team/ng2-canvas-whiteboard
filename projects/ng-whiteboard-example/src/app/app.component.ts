@@ -1,16 +1,22 @@
-import { Component, ViewChild } from '@angular/core';
+import {ChangeDetectionStrategy, Component, ViewChild} from '@angular/core';
 import {
   CanvasWhiteboardComponent,
-  CanvasWhiteboardService,
-  CanvasWhiteboardUpdate,
   CanvasWhiteboardOptions,
-  CanvasWhiteboardShapeService, CircleShape, SmileyShape, StarShape, LineShape, RectangleShape
+  CanvasWhiteboardService,
+  CanvasWhiteboardShapeService,
+  CanvasWhiteboardUpdate,
+  CircleShape,
+  LineShape,
+  RectangleShape,
+  SmileyShape,
+  StarShape
 } from '@drizm/ng-whiteboard';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
   @ViewChild(CanvasWhiteboardComponent) canvasWhiteboardComponent!: CanvasWhiteboardComponent;
